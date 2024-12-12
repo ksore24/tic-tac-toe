@@ -1,0 +1,47 @@
+html, body{
+    height: 100%;
+    width: 100%;
+    margin: 0px;
+}
+
+h1{
+    text-align: center;
+}
+
+button{
+    width: 100px;
+    margin-bottom: 10px;
+}
+
+form{
+    display: flex;
+    flex-direction: column;
+    width: 200px;
+}
+
+input{
+    margin-bottom: 10px;
+}
+
+.gameBoard{
+    display: grid;
+    grid-template-columns: repeat(3, 150px);
+    grid-template-rows: repeat(3, 150px);
+    justify-content: center;
+}
+
+.square{
+    border: 1px solid black;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 100px;
+}
+
+.gameHeader{
+    text-align: center;
+}
+
+.disabled{
+    pointer-events: none;
+}
