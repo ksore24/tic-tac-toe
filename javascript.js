@@ -1,4 +1,8 @@
-let playerCount = 1;
+let playerCount;
+let player1Name;
+let player2Name;
+const playerTurn = document.createElement('div');
+playerTurn.className = 'playerTurn';
 const gameBoardArray = [];
 const header = document.createElement('h1');
 header.textContent = 'TIC-TAC-TOE';
@@ -52,15 +56,12 @@ function createGameForm(){
 
 
 function createGame(){
-    const player1 = new Player(player1Input, 1);
-    const player2 = new Player(player2Input, 2);
+    playerCount = 1;
+    player1Name = player1Input.value;
+    player2Name = player2Input.value;
     while(document.body.firstChild)
         document.body.removeChild(document.body.firstChild);
     document.body.appendChild(header);
-    const gameHeader = document.createElement('div');
-    gameHeader.className = 'gameHeader'
-    document.body.appendChild(gameHeader);
-    updateGameHeader(gameHeader);
     const gameBoard = document.createElement('div');
     gameBoard.className = "gameBoard";
     for(i = 0; i < 9; i++)
@@ -71,31 +72,242 @@ function createGame(){
         gameBoard.appendChild(gameBoardArray[i]);
     }
     document.body.appendChild(gameBoard);
-}
+    playerTurn.textContent = player1Name+"'s (X's) Turn";
+    document.body.appendChild(playerTurn);
 
-function updateGameHeader(gameHeader){
-    document.body.removeChild(gameHeader);
-    if(playerCount % 2 == 1)
-        gameHeader.textContent = "Player 1 (X)'s Turn";
-    else
-        gameHeader.textContent = "Player 2 (O)'s Turn";
-    document.body.appendChild(gameHeader);
 }
 
 function addMark(){
     if(playerCount % 2 == 1)
+    {
         this.textContent = 'X';
+        document.body.removeChild(document.body.lastChild);
+        playerTurn.textContent = player2Name+"'s (O's) Turn";
+    document.body.appendChild(playerTurn);
+    checkWin();
+    }
+
     else
+    {
         this.textContent = 'O';
+        document.body.removeChild(document.body.lastChild);
+        playerTurn.textContent = player1Name+"'s (X's) Turn";
+    document.body.appendChild(playerTurn);
+    checkWin();
+    }
     this.classList.add("disabled");
     playerCount++;
 }
 
-function Player(playerName, playerNumber){
-    this.name = playerName;
-    this.number = playerNumber;
-    if(playerNumber % 2 == 1)
-        this.mark = 'X';
+function checkWin(){
+    if(gameBoardArray[0].textContent == gameBoardArray[1].textContent && gameBoardArray[1].textContent == gameBoardArray[2].textContent)
+    {
+        if(gameBoardArray[0].textContent == 'X')
+        {
+            document.body.removeChild(document.body.lastChild);
+            playerTurn.textContent = player1Name+" (X) WINS";
+            document.body.appendChild(playerTurn);
+            for(i=0;i<9;i++)
+            gameBoardArray[i].classList.add("disabled");
+        document.body.appendChild(newGameButton);
+        newGameButton.addEventListener("click", createGameForm);
+        }
+        
+        if(gameBoardArray[0].textContent == 'O')
+            {
+                document.body.removeChild(document.body.lastChild);
+                playerTurn.textContent = player2Name+" (O) WINS";
+                document.body.appendChild(playerTurn);
+                for(i=0;i<9;i++)
+                gameBoardArray[i].classList.add("disabled");
+            document.body.appendChild(newGameButton);
+            newGameButton.addEventListener("click", createGameForm);
+            }
+    }
+
+    if(gameBoardArray[3].textContent == gameBoardArray[4].textContent && gameBoardArray[4].textContent == gameBoardArray[5].textContent)
+        {
+            if(gameBoardArray[3].textContent == 'X')
+            {
+                document.body.removeChild(document.body.lastChild);
+                playerTurn.textContent = player1Name+" (X) WINS";
+                document.body.appendChild(playerTurn);
+                for(i=0;i<9;i++)
+                gameBoardArray[i].classList.add("disabled");
+            document.body.appendChild(newGameButton);
+            newGameButton.addEventListener("click", createGameForm);
+            }
+            
+            if(gameBoardArray[3].textContent == 'O')
+                {
+                    document.body.removeChild(document.body.lastChild);
+                    playerTurn.textContent = player2Name+" (O) WINS";
+                    document.body.appendChild(playerTurn);
+                    for(i=0;i<9;i++)
+                    gameBoardArray[i].classList.add("disabled");
+                document.body.appendChild(newGameButton);
+                newGameButton.addEventListener("click", createGameForm);
+                }
+        }
+
+    if(gameBoardArray[6].textContent == gameBoardArray[7].textContent && gameBoardArray[7].textContent == gameBoardArray[8].textContent)
+        {
+            if(gameBoardArray[6].textContent == 'X')
+            {
+                document.body.removeChild(document.body.lastChild);
+                playerTurn.textContent = player1Name+" (X) WINS";
+                document.body.appendChild(playerTurn);
+                for(i=0;i<9;i++)
+                gameBoardArray[i].classList.add("disabled");
+                document.body.appendChild(newGameButton);
+                newGameButton.addEventListener("click", createGameForm);
+            }
+                
+            if(gameBoardArray[6].textContent == 'O')
+                {
+                    document.body.removeChild(document.body.lastChild);
+                    playerTurn.textContent = player2Name+" (O) WINS";
+                    document.body.appendChild(playerTurn);
+                    for(i=0;i<9;i++)
+                    gameBoardArray[i].classList.add("disabled");
+                    document.body.appendChild(newGameButton);
+                    newGameButton.addEventListener("click", createGameForm);
+                }
+            }
+
+    if(gameBoardArray[0].textContent == gameBoardArray[3].textContent && gameBoardArray[3].textContent == gameBoardArray[6].textContent)
+        {
+            if(gameBoardArray[0].textContent == 'X')
+            {
+                document.body.removeChild(document.body.lastChild);
+                playerTurn.textContent = player1Name+" (X) WINS";
+                document.body.appendChild(playerTurn);
+                for(i=0;i<9;i++)
+                gameBoardArray[i].classList.add("disabled");
+                document.body.appendChild(newGameButton);
+                newGameButton.addEventListener("click", createGameForm);
+            }
+                
+            if(gameBoardArray[0].textContent == 'O')
+                {
+                    document.body.removeChild(document.body.lastChild);
+                    playerTurn.textContent = player2Name+" (O) WINS";
+                    document.body.appendChild(playerTurn);
+                    for(i=0;i<9;i++)
+                    gameBoardArray[i].classList.add("disabled");
+                    document.body.appendChild(newGameButton);
+                    newGameButton.addEventListener("click", createGameForm);
+                }
+            }
+
+    if(gameBoardArray[1].textContent == gameBoardArray[4].textContent && gameBoardArray[4].textContent == gameBoardArray[7].textContent)
+    {
+        if(gameBoardArray[1].textContent == 'X')
+        {
+            document.body.removeChild(document.body.lastChild);
+            playerTurn.textContent = player1Name+" (X) WINS";
+            document.body.appendChild(playerTurn);                        
+            for(i=0;i<9;i++)
+            gameBoardArray[i].classList.add("disabled");
+            document.body.appendChild(newGameButton);
+            newGameButton.addEventListener("click", createGameForm);
+        }
+                
+        if(gameBoardArray[1].textContent == 'O')
+        {
+            document.body.removeChild(document.body.lastChild);
+            playerTurn.textContent = player2Name+" (O) WINS";
+            document.body.appendChild(playerTurn);
+            for(i=0;i<9;i++)
+            gameBoardArray[i].classList.add("disabled");
+            document.body.appendChild(newGameButton);
+            newGameButton.addEventListener("click", createGameForm);
+        }
+    }
+
+    if(gameBoardArray[2].textContent == gameBoardArray[5].textContent && gameBoardArray[5].textContent == gameBoardArray[8].textContent)
+    {
+        if(gameBoardArray[2].textContent == 'X')
+        {
+        document.body.removeChild(document.body.lastChild);
+        playerTurn.textContent = player1Name+" (X) WINS";
+        document.body.appendChild(playerTurn);
+        for(i=0;i<9;i++)
+        gameBoardArray[i].classList.add("disabled");
+        document.body.appendChild(newGameButton);
+        newGameButton.addEventListener("click", createGameForm);
+        }
+        
+        if(gameBoardArray[2].textContent == 'O')
+            {
+            document.body.removeChild(document.body.lastChild);
+            playerTurn.textContent = player2Name+" (O) WINS";
+            document.body.appendChild(playerTurn);
+            for(i=0;i<9;i++)
+            gameBoardArray[i].classList.add("disabled");
+            document.body.appendChild(newGameButton);
+            newGameButton.addEventListener("click", createGameForm);
+            }
+    }
+
+    if(gameBoardArray[0].textContent == gameBoardArray[4].textContent && gameBoardArray[4].textContent == gameBoardArray[8].textContent)
+    {
+        if(gameBoardArray[0].textContent == 'X')
+        {
+        document.body.removeChild(document.body.lastChild);
+        playerTurn.textContent = player1Name+" (X) WINS";
+        document.body.appendChild(playerTurn);
+        for(i=0;i<9;i++)
+        gameBoardArray[i].classList.add("disabled");
+        document.body.appendChild(newGameButton);
+        newGameButton.addEventListener("click", createGameForm);
+        }
+        
+        if(gameBoardArray[0].textContent == 'O')
+            {
+            document.body.removeChild(document.body.lastChild);
+            playerTurn.textContent = player2Name+" (O) WINS";
+            document.body.appendChild(playerTurn);
+            for(i=0;i<9;i++)
+            gameBoardArray[i].classList.add("disabled");
+            document.body.appendChild(newGameButton);
+            newGameButton.addEventListener("click", createGameForm);
+            }
+    }
+    if(gameBoardArray[2].textContent == gameBoardArray[4].textContent && gameBoardArray[4].textContent == gameBoardArray[6].textContent)
+        {
+            if(gameBoardArray[2].textContent == 'X')
+            {
+            document.body.removeChild(document.body.lastChild);
+            playerTurn.textContent = player1Name+" (X) WINS";
+            document.body.appendChild(playerTurn);
+            for(i=0;i<9;i++)
+            gameBoardArray[i].classList.add("disabled");
+            document.body.appendChild(newGameButton);
+            newGameButton.addEventListener("click", createGameForm);
+            }
+            
+            if(gameBoardArray[2].textContent == 'O')
+                {
+                document.body.removeChild(document.body.lastChild);
+                playerTurn.textContent = player2Name+" (O) WINS";
+                document.body.appendChild(playerTurn);
+                for(i=0;i<9;i++)
+                gameBoardArray[i].classList.add("disabled");
+                document.body.appendChild(newGameButton);
+                newGameButton.addEventListener("click", createGameForm);
+                }
+        }
+    
+    if(playerCount == 9 && document.body.lastChild != newGameButton)
+    {
+        document.body.removeChild(document.body.lastChild);
+        playerTurn.textContent = "It's a TIE";
+        document.body.appendChild(playerTurn);
+        document.body.appendChild(newGameButton);
+        newGameButton.addEventListener("click", createGameForm);
+    }
+    
     else
-        this.mark = 'O';
+    return false;
 }

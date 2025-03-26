@@ -11,12 +11,16 @@ h1{
 button{
     width: 100px;
     margin-bottom: 10px;
+    display: flex;
+    justify-self: center;
+    justify-content: center;
 }
 
 form{
     display: flex;
     flex-direction: column;
     width: 200px;
+    justify-self: center;
 }
 
 input{
@@ -28,6 +32,7 @@ input{
     grid-template-columns: repeat(3, 150px);
     grid-template-rows: repeat(3, 150px);
     justify-content: center;
+    margin-bottom: 10px;
 }
 
 .square{
@@ -44,4 +49,10 @@ input{
 
 .disabled{
     pointer-events: none;
+}
+
+.playerTurn{
+    display: flex;
+    justify-content: center;
+    margin-bottom: 10px;
 }
